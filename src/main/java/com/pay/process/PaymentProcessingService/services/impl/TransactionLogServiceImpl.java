@@ -3,6 +3,8 @@ package com.pay.process.PaymentProcessingService.services.impl;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,37 +31,39 @@ public class TransactionLogServiceImpl implements TransactionLogService {
 	@Override
 	public TransactionLogEntity create(TransactionLogEntity _transactionLog) {
 		// TODO Auto-generated method stub
-		return null;
+		return _transactionLogRepository.save(_transactionLog);
 	}
 
 	@Override
 	public TransactionLogEntity save(TransactionLogEntity _transactionLogEntity) {
 		// TODO Auto-generated method stub
-		return null;
+		return _transactionLogRepository.save(_transactionLogEntity);
 	}
 
 	@Override
 	public List<TransactionLogEntity> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return StreamSupport.stream(_transactionLogRepository.findAll()
+				.spliterator(),false)
+					.collect(Collectors.toList());
 	}
 
 	@Override
 	public Page<TransactionLogEntity> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
-		return null;
+		return _transactionLogRepository.findAll(pageable);
 	}
 
 	@Override
 	public Optional<TransactionLogEntity> findOne(UUID id) {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		return _transactionLogRepository.findById(id);
 	}
 
 	@Override
 	public boolean isExists(UUID id) {
 		// TODO Auto-generated method stub
-		return false;
+		return _transactionLogRepository.existsById(id);
 	}
 
 	@Override
@@ -71,7 +75,7 @@ public class TransactionLogServiceImpl implements TransactionLogService {
 	@Override
 	public void delete(UUID _id) {
 		// TODO Auto-generated method stub
-
+		_transactionLogRepository.deleteById(_id);
 	}
 
 }

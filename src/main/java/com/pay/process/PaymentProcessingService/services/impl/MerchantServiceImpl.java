@@ -3,6 +3,8 @@ package com.pay.process.PaymentProcessingService.services.impl;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,37 +30,39 @@ public class MerchantServiceImpl implements MerchantService {
 	@Override
 	public MerchantEntity create(MerchantEntity _merchant) {
 		// TODO Auto-generated method stub
-		return null;
+		return _merchantRepository.save(_merchant);
 	}
 
 	@Override
 	public MerchantEntity save(MerchantEntity _merchantEntity) {
 		// TODO Auto-generated method stub
-		return null;
+		return _merchantRepository.save(_merchantEntity);
 	}
 
 	@Override
 	public List<MerchantEntity> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return StreamSupport.stream(_merchantRepository.findAll()
+				.spliterator(),false)
+					.collect(Collectors.toList());
 	}
 
 	@Override
 	public Page<MerchantEntity> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
-		return null;
+		return _merchantRepository.findAll(pageable);
 	}
 
 	@Override
 	public Optional<MerchantEntity> findOne(UUID id) {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		return _merchantRepository.findById(id);
 	}
 
 	@Override
 	public boolean isExists(UUID id) {
 		// TODO Auto-generated method stub
-		return false;
+		return _merchantRepository.existsById(id);
 	}
 
 	@Override
@@ -70,7 +74,7 @@ public class MerchantServiceImpl implements MerchantService {
 	@Override
 	public void delete(UUID _id) {
 		// TODO Auto-generated method stub
-
+		_merchantRepository.deleteById(_id);
 	}
 
 }

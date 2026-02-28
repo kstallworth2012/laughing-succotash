@@ -3,6 +3,8 @@ package com.pay.process.PaymentProcessingService.services.impl;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,37 +31,39 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 	@Override
 	public PaymentMethodEntity create(PaymentMethodEntity _paymentMethod) {
 		// TODO Auto-generated method stub
-		return null;
+		return _paymentMethodRepository.save(_paymentMethod);
 	}
 
 	@Override
 	public PaymentMethodEntity save(PaymentMethodEntity _paymentMethodEntity) {
 		// TODO Auto-generated method stub
-		return null;
+		return _paymentMethodRepository.save(_paymentMethodEntity);
 	}
 
 	@Override
 	public List<PaymentMethodEntity> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return StreamSupport.stream(_paymentMethodRepository.findAll()
+				.spliterator(),false)
+					.collect(Collectors.toList());
 	}
 
 	@Override
 	public Page<PaymentMethodEntity> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
-		return null;
+		return _paymentMethodRepository.findAll(pageable);
 	}
 
 	@Override
 	public Optional<PaymentMethodEntity> findOne(UUID id) {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		return _paymentMethodRepository.findById(id);
 	}
 
 	@Override
 	public boolean isExists(UUID id) {
 		// TODO Auto-generated method stub
-		return false;
+		return _paymentMethodRepository.existsById(id);
 	}
 
 	@Override
@@ -71,7 +75,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 	@Override
 	public void delete(UUID _id) {
 		// TODO Auto-generated method stub
-
+		_paymentMethodRepository.deleteById(_id);
 	}
 
 }
