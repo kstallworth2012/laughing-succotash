@@ -1,23 +1,11 @@
-package com.pay.process.PaymentProcessingService.domain.entities;
+package com.pay.process.PaymentProcessingService.domain.dto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.pay.process.PaymentProcessingService.domain.entities.TransactionEntity;
 
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Entity
-@Table(name = "transactionLog")
-public class TransactionLogEntity {
+public class TransactionLogDTO {
 
 	
 	
@@ -50,6 +38,8 @@ public class TransactionLogEntity {
 	public void setMetadata(String metadata) {
 		this.metadata = metadata;
 	}
+	  
+	  
 	  
 	  
 }
