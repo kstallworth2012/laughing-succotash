@@ -70,7 +70,11 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public TransactionEntity partialUpdate(UUID _id, TransactionEntity _transaction) {
 		// TODO Auto-generated method stub
-		return null;
+		_transaction.setId(_id);
+		
+		return transactionRepository.findById(_id).map(existingTransaction -> {
+			 return transactionRepository.save(existingTransaction);
+		}).orElseThrow(  ()-> new RuntimeException("Transaction doesn't exist"));
 	}
 
 	@Override

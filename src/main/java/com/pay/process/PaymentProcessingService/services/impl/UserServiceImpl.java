@@ -65,8 +65,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserEntity partialUpdate(UUID _id, UserEntity _user) {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		_user.setUser_id(_id);
+		
+		return _userRepository.findById(_id).map(existingUser -> {
+			 return _userRepository.save(existingUser);
+		}).orElseThrow(  ()-> new RuntimeException("User doesn't exist"));
+	 }
+	
 
 	@Override
 	public void delete(UUID _id) {

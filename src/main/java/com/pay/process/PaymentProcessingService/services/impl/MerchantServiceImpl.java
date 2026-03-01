@@ -68,7 +68,17 @@ public class MerchantServiceImpl implements MerchantService {
 	@Override
 	public MerchantEntity partialUpdate(UUID _id, MerchantEntity _Merchant) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		_Merchant.setMerchant_id(_id);
+		
+		
+	return _merchantRepository.findById(_id).map(existingMerchant ->{
+		
+		
+		return  _merchantRepository.save(existingMerchant);
+	}).orElseThrow(()-> new RuntimeException("Merchant does not exists")); 
+		
+		
 	}
 
 	@Override

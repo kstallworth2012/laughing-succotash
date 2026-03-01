@@ -66,7 +66,16 @@ public class TransactionEventServiceImpl implements TransactionEventService {
 	@Override
 	public TransactionEventEntity partialUpdate(UUID _id, TransactionEventEntity _TransactionEvent) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		_TransactionEvent.setTransactionEvent_id(_id);
+		
+		return _transactionEventReposit.findById(_id).map(existingTransactionEvent ->{
+			
+		      return 	_transactionEventReposit.save(existingTransactionEvent);
+		}).orElseThrow(()-> new RuntimeException("Transaction Event doesn't exist"));
+		
+		
+		
 	}
 
 	@Override

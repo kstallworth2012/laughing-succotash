@@ -69,7 +69,13 @@ public class TransactionLogServiceImpl implements TransactionLogService {
 	@Override
 	public TransactionLogEntity partialUpdate(UUID _id, TransactionLogEntity _transactionLog) {
 		// TODO Auto-generated method stub
-		return null;
+		_transactionLog.setTransaction_log_id(_id);
+		return _transactionLogRepository.findById(_id).map(existingTransactionLogEntity -> {
+			
+			
+			return _transactionLogRepository.save(existingTransactionLogEntity);
+		}).orElseThrow( ()-> new RuntimeException("Transaction Log doesn't exist")  );
+	
 	}
 
 	@Override

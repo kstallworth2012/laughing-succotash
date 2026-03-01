@@ -68,8 +68,14 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 
 	@Override
 	public PaymentMethodEntity partialUpdate(UUID _id, PaymentMethodEntity _paymentMethod) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO Auto-generated method stub 
+		_paymentMethod.setPayment_method_id(_id);
+		
+		return _paymentMethodRepository.findById(_id).map(existingPaymentMethod ->{
+			   
+			return _paymentMethodRepository.save(existingPaymentMethod);
+		}).orElseThrow(()-> new RuntimeException("Payment Method doesn't exist"));
+					 
 	}
 
 	@Override
